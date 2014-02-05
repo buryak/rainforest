@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_filter :ensure_logged_in, only: [:show]
   
   def index
     @products = Product.all
@@ -8,7 +9,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     if current_user
-      @review = @product.review.build
+      @review = @product.reviews.build
     end
   end
 
